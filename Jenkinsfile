@@ -2,23 +2,32 @@ pipeline {
     agent any
 
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Build') {
             steps {
-                // Example: Run a shell command
-                sh 'echo "Building..."'
+                script {
+                    def buildCmd = "nohup ./your-build-script.sh &"
+                    sh "echo 'Starting build...'"
+                    sh buildCmd
+                }
             }
         }
+
         stage('Test') {
             steps {
-                // Example: Run tests
-                sh 'echo "Testing..."'
+                sh './run-tests.sh'
             }
         }
+
         stage('Deploy') {
             steps {
-                // Example: Deployment steps
-                sh 'echo "Deploying..."'
+                sh './deploy.sh'
             }
-        }
-    }
+        }
+    }
 }
