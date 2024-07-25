@@ -11,7 +11,6 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    buildCmd = "nohup ./your-build-script.sh &"
                     sh "echo 'Starting build...'"
                     sh buildCmd
                 }
